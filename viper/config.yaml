@@ -1,0 +1,7 @@
+mysql:
+    dbname: gorm
+    host: 192.168.56.101
+    password: "123456"
+    port: 3306
+    timeout: 10
+    username: root
