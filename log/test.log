@@ -1,0 +1,27 @@
+2024/05/02 17:44:47 Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 17:44:48 Status Code for http://www.baidu.com : 200 OK
+2024/05/02 17:44:48 Status Code for https://www.baidu.com : 200 OK
+2024/05/02 17:49:09.595145 D:/goproject/src/go_code/go_demo/log/main.go:28: Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 17:49:09.700142 D:/goproject/src/go_code/go_demo/log/main.go:30: Status Code for http://www.baidu.com : 200 OK
+2024/05/02 17:49:09.912925 D:/goproject/src/go_code/go_demo/log/main.go:30: Status Code for https://www.baidu.com : 200 OK
+2024/05/02 17:49:30.380928 main.go:28: Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 17:49:30.488365 main.go:30: Status Code for http://www.baidu.com : 200 OK
+2024/05/02 17:49:30.661060 main.go:30: Status Code for https://www.baidu.com : 200 OK
+2024/05/02 09:50:19.837608 Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 09:50:19.925538 Status Code for http://www.baidu.com : 200 OK
+2024/05/02 09:50:20.117844 Status Code for https://www.baidu.com : 200 OK
+Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+Status Code for http://www.baidu.com : 200 OK
+Status Code for https://www.baidu.com : 200 OK
+2024/05/02 09:51:32.133061 tomError fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 09:51:32.225120 tomStatus Code for http://www.baidu.com : 200 OK
+2024/05/02 09:51:32.414496 tomStatus Code for https://www.baidu.com : 200 OK
+tom2024/05/02 09:51:46.336396 Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+tom2024/05/02 09:51:46.439243 Status Code for http://www.baidu.com : 200 OK
+tom2024/05/02 09:51:46.628670 Status Code for https://www.baidu.com : 200 OK
+2024/05/02 09:52:42.592075 Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 09:52:42.688929 Status Code for http://www.baidu.com : 200 OK
+2024/05/02 09:52:42.879515 Status Code for https://www.baidu.com : 200 OK
+2024/05/02 09:54:27.659810 Error fetching url www.baidu.com : Get "www.baidu.com": unsupported protocol scheme ""
+2024/05/02 09:54:27.764470 Status Code for http://www.baidu.com : 200 OK
+2024/05/02 09:54:27.945202 Status Code for https://www.baidu.com : 200 OK
