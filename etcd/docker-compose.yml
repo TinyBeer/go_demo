@@ -12,11 +12,17 @@ services:
       # - ETCD_INITIAL_CLUSTER=node
       # - ETCD_INITIAL_CLUSTER_STATE=new
       # - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
-      # - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
-      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_LISTEN_CLIENT_URLS=https://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=https://0.0.0.0:2379
+      - ETCD_TRUSTED_CA_FILE=/opt/etcd/ssl/ca.crt
+      - ETCD_CERT_FILE=/opt/etcd/ssl/server.crt
+      - ETCD_KEY_FILE=/opt/etcd/ssl/server.key
+      - ETCD_CLIENT_CERT_AUTH=true
+      - ETCD_AUTH_ENABLED=true
     networks:
       - etcd_network
-    
+    volumes:
+      - ./ssl:/opt/etcd/ssl
 networks:
   etcd_network:
     driver: bridge

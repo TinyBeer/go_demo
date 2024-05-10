@@ -162,3 +162,25 @@ resp, err := cli.Grant(context.Background(), 5)
 ```go
 
 ```
+
+``` shell
+# 1. 生成CA证书和密钥
+openssl genrsa -out ca.key 2048
+openssl req -x509 -new -nodes -key ca.key -subj "/CN=etcd-ca" -days 10000 -out ca.crt
+ 
+# 2. 为etcd服务器生成SSL证书和密钥
+openssl genrsa -out server.key 2048
+openssl req -new -key server.key -subj "/CN=etcd-server" -out server.csr
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 10000
+ 
+# 3. 为etcd客户端生成SSL证书和密钥
+openssl genrsa -out client.key 2048
+openssl req -new -key client.key -subj "/CN=etcd-client" -out client.csr
+openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 10000
+ 
+# 4. 服务器带上IP SANs
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 3650  -extfile .\extensions.conf
+
+# todo 待验证
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 3650 -extensions v3_req -extfile '<(printf "subjectAltName = IP:192.168.56.101")'
+```
