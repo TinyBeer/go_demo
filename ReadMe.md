@@ -1,1 +1,1 @@
-- [`Spew`](https://github.com/davecgh/go-spew) 一个漂亮的深度打印机
+- [`Spew`](https://github.com/davecgh/go-spew) 一个漂亮的深度Go数据结构打印机
