@@ -1,2 +1,4 @@
-- [`bcrypt`](https://pkg.go.dev/golang.org/x/crypto@v0.22.0/bcrypt#pkg-functions) 是一款加密工具，生成 60 位散列密文，可通过配置 const 实现不同强度的加密。
+- [`bcrypt`](https://pkg.go.dev/golang.org/x/crypto@v0.22.0/bcrypt#pkg-functions) 是一款加密工具，生成 60 位散列密文，可通过配置 cost 实现不同强度的加密。
 - [`Spew`](https://github.com/davecgh/go-spew) 一个漂亮的深度 Go 数据结构打印机。
+- [runtime/metrics](https://pkg.go.dev/runtime/metrics) 官方提供的性能指标接口。
+- [net/rpc](https://pkg.go.dev/net/rpc#ServeCodec) 官方提供的 rpc 实现，支持 tcp 和 http 两种信道。
