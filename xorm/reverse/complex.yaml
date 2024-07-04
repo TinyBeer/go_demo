@@ -1,0 +1,40 @@
+kind: reverse
+name: mydb
+source:
+  database: mysql
+  conn_str: 'root:123456@/test?charset=utf8mb4'
+targets:
+- type: codes
+  # include_tables: # 需要导出的表
+  #   - a
+  #   - b
+  # exclude_tables: # 需要排除的表
+  #   - c
+  table_mapper: snake # 表名映射规则
+  column_mapper: snake # 字段映射规则
+  table_prefix: "my_" # 表名前缀  默认会去除掉的部分
+  multiple_files: true # 生产多份文件
+  language: golang
+  template: | # 代码模板 使用的是golang模板语法
+    package models
+
+    {{$ilen := len .Imports}}
+    {{if gt $ilen 0}}
+    import (
+      {{range .Imports}}"{{.}}"{{end}}
+    )
+    {{end}}
+
+    {{range .Tables}}
+    type {{TableMapper .Name}} struct {
+    {{$table := .}}
+    {{range .ColumnsSeq}}{{$col := $table.GetColumn .}}	{{ColumnMapper $col.Name}}	{{Type $col}} `{{Tag $table $col}}`
+    {{end}}
+    }
+
+    func (m *{{TableMapper .Name}}) TableName() string {
+    	return "{{$table.Name}}"
+    }
+    {{end}}
+  template_path: ./template/goxorm.tmpl # 模板文件路径  优先级低于template字段
+  output_dir: ./models # 生产文件路径
