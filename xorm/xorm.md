@@ -29,7 +29,59 @@ engine, err := xorm.NewEngine("mysql", "root:123456@/test?charset=utf8mb4")
 一般情况下如果只操作一个数据库，只需要创建一个 engine 即可。engine 是 GoRoutine 安全的。
 创建完成 engine 之后，并没有立即连接数据库，此时可以通过 engine.Ping() 或者 engine.PingContext() 来进行数据库的连接测试是否可以连接到数据库。另外对于某些数据库有连接超时设置的，可以通过起一个定期Ping的Go程来保持连接鲜活。
 ### Engine Group
-<!-- TODO: 补充内容 -->
+Engine Group是xorm的主从读写分离解决方案，主要配置内容为主库和从库的配置，以及从库的负载策略。
+#### 创建Engine Group
+xorm通过`xorm.NewEngineGroup`实现，但是有两种使用方式。
+* 第一种，通过dsn数组方式。所有Engine使用同一种数据库驱动。
+```go
+conns := []string{
+		"root:123456@/test?charset=utf8mb4",  // 第一个默认是master
+		"root:123456@/test1?charset=utf8mb4", // 第二个开始都是slave
+		"root:123456@/test2?charset=utf8mb4",
+	}
+eg, err := xorm.NewEngineGroup("mysql", conns)
+```
+* 第二种，通过Engine创建。可以为Engine配置不同的数据库驱动。
+```go
+master, err := xorm.NewEngine("mysql", "root:123456@/test?charset=utf8mb4")
+if err != nil {
+  panic(err)
+}
+
+slave1, err := xorm.NewEngine("mysql", "root:123456@/test1?charset=utf8mb4")
+if err != nil {
+  panic(err)
+}
+
+slave2, err := xorm.NewEngine("mysql", "root:123456@/test2?charset=utf8mb4")
+if err != nil {
+  panic(err)
+}
+
+slaves := []*xorm.Engine{slave1, slave2}
+eg, err := xorm.NewEngineGroup(master, slaves)
+```
+
+创建完成 EngineGroup 之后，并没有立即连接数据库，此时可以通过 eg.Ping() 来进行数据库的连接测试是否可以连接到数据库，该方法会依次调用引擎组中每个Engine的Ping方法。另外对于某些数据库有连接超时设置的，可以通过起一个定期Ping的Go程来保持连接鲜活。EngineGroup 可以通过 eg.Close() 来手动关闭，但是一般情况下可以不用关闭，在程序退出时会自动关闭。
+#### 设置 Engine 组策略
+通过 xorm.NewEngineGroup 创建 EngineGroup 时，第三个参数为 policies，我们可以通过该参数来指定 Slave 访问的负载策略。
+```go
+eg, err := xorm.NewEngineGroup("mysql", conns, xorm.RandomPolicy())
+// 或者
+eg.SetPolicy(xorm.LeastConnPolicy())
+```
+xorm 中内置五种负载策略：
+* 随机访问负载策略 `xorm.RandomPolicy`
+* 权重随机访问负载策略 `xorm.WeightRandomPolicy`
+* 轮询访问负载策略 `xorm.RoundRobinPolicy`
+* 权重轮询访问负载策略 `xorm.WeightRoundRobinPolicy`
+* 最小连接数访问负载策略 `xorm.LeastConnPolicy`
+当然，也可以通过实现`GroupPolicy`接口，自定义策略
+```go
+type GroupPolicy interface {
+	Slave(*EngineGroup) *Engine
+}
+```
 
 ### 日志
 日志是一个接口，通过设置日志，可以显示SQL，警告以及错误等，默认的显示级别为 INFO。
