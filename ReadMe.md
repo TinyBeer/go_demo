@@ -6,3 +6,4 @@
 - [mogodb](https://www.mongodb.com) 一个灵活的高性能数据库解决方案。
 - [elasticsearch](https://www.elastic.co/) 一个高度可扩展的开源实时搜索和分析引擎。
 - [xorm](https://xorm.io/zh/) 是一个简单而强大的 Go 语言 ORM 框架。
+- [cron](https://github.com/robfig/cron)一个用于管理定时任务的库，用 Go 实现 Linux 中crontab这个命令的效果。
