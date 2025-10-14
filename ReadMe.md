@@ -1,3 +1,4 @@
+- [validator](https://github.com/go-playground/validator) 使用最广泛的参数校验工具。
 - [bcrypt](https://pkg.go.dev/golang.org/x/crypto@v0.22.0/bcrypt#pkg-functions) 是一款加密工具，生成 60 位散列密文，可通过配置 cost 实现不同强度的加密。
 - [ppew](https://github.com/davecgh/go-spew) 一个漂亮的深度 Go 数据结构打印机。
 - [runtime/metrics](https://pkg.go.dev/runtime/metrics) 官方提供的性能指标接口。
