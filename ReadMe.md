@@ -9,3 +9,5 @@
 - [elasticsearch](https://www.elastic.co/) 一个高度可扩展的开源实时搜索和分析引擎。
 - [xorm](https://xorm.io/zh/) 是一个简单而强大的 Go 语言 ORM 框架。
 - [cron](https://github.com/robfig/cron)一个用于管理定时任务的库，用 Go 实现 Linux 中crontab这个命令的效果。
+- [protocompile](https://github.com/bufbuild/protocompile) 纯 Go 实现的 proto 解析/链接库，可以用准确的分析 proto 文件。
+- [protoreflect](https://github.com/jhump/protoreflect) 提供了 Go 便捷 proto 文件的能力。
